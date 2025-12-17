@@ -10,7 +10,7 @@ Modern **Dark Mode** arayüzü, **Yapay Zeka (AI)** destekli analiz motorları v
 
 ### 1. Operasyon Kontrol Merkezi (Dashboard)
 Projenin kalbi. Tüm saldırı, savunma ve analiz modüllerine tek bir noktadan erişim sağlayan, Cyberpunk temalı profesyonel yönetim paneli.
-![Dashboard Arayüzü](screenshots/anasayfa.jpg)
+![Dashboard Arayüzü](ssler/anasayfa1.jpg)
 * **Canlı İstatistikler:** Sistem durumu ve aktif modül takibi.
 * **Kategorize Yapı:** İleri Seviye, Ağ Savunması ve Saldırı (Red Team) olarak ayrılmış modüller.
 
@@ -18,7 +18,7 @@ Projenin kalbi. Tüm saldırı, savunma ve analiz modüllerine tek bir noktadan 
 
 ### 2. Canlı Ağ Trafiği İzleme (IDS)
 Ağ üzerindeki paketleri gerçek zamanlı simüle eden ve anormallikleri tespit eden Saldırı Tespit Sistemi.
-![IDS Ekranı](screenshots/ids.jpg)
+![IDS Ekranı](ssler/agtrafigi.jpg)
 * **Tehdit Algılama:** SQL Injection, DDoS veya şüpheli payload içeren paketleri (Kırmızı Uyarı) otomatik yakalar.
 * **Protokol Analizi:** TCP, UDP, HTTP protokollerini izler.
 
@@ -26,7 +26,7 @@ Ağ üzerindeki paketleri gerçek zamanlı simüle eden ve anormallikleri tespit
 
 ### 3. Sızma Testi Laboratuvarı (SQL Injection)
 Web güvenliğinin en kritik açıklarından biri olan SQL Injection zafiyetini güvenli bir ortamda test edin.
-![SQL Injection Lab](screenshots/sqli.jpg)
+![SQL Injection Lab](ssler/sqlinjectionlab.jpg)
 * **Zafiyet Simülasyonu:** Admin paneline yetkisiz giriş senaryoları.
 * **Payload Testi:** `' OR '1'='1` gibi klasik saldırı vektörlerini deneyimleyin.
 
