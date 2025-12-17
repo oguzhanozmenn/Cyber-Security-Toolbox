@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modül 11: AI Phishing Dedektörü</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; color: #333; text-align: center; padding: 20px; }
+        .container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+
+        h1 { color: #2c3e50; margin-bottom: 5px; }
+        p.desc { color: #7f8c8d; margin-bottom: 30px; }
+
+        input[type="text"] { width: 70%; padding: 15px; border: 2px solid #ddd; border-radius: 50px; font-size: 16px; outline: none; transition: 0.3s; }
+        input[type="text"]:focus { border-color: #3498db; box-shadow: 0 0 10px rgba(52, 152, 219, 0.2); }
+
+        button { padding: 15px 30px; background-color: #3498db; color: white; border: none; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-left: 10px; }
+        button:hover { background-color: #2980b9; transform: scale(1.05); }
+
+        .result-card { margin-top: 30px; padding: 20px; border-radius: 10px; text-align: left; animation: slideIn 0.5s ease; }
+        .score-circle { width: 80px; height: 80px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 20px auto; color: white; }
+
+        .risk-low { background-color: #27ae60; border: 2px solid #2ecc71; color: white; }
+        .risk-med { background-color: #f39c12; border: 2px solid #e67e22; color: white; }
+        .risk-high { background-color: #c0392b; border: 2px solid #e74c3c; color: white; }
+
+        ul { list-style-type: none; padding: 0; }
+        li { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div style="font-size: 50px;">🧠</div>
+    <h1>AI Phishing Dedektörü</h1>
+    <p class="desc">Yapay Zeka Destekli URL Risk Analiz Motoru</p>
+
+    <form method="POST">
+        <input type="text" name="url" placeholder="Analiz edilecek web sitesi adresini girin..." required>
+        <button type="submit">ANALİZ ET</button>
+    </form>
+
+    {% if analiz %}
+    <div class="result-card {{ 'risk-low' if analiz.skor < 40 else 'risk-med' if analiz.skor < 70 else 'risk-high' }}">
+        <div class="score-circle" style="background-color: white; color: #333;">
+            %{{ analiz.skor }}
+        </div>
+
+        <h2 style="text-align: center; margin: 0;">RİSK SEVİYESİ: {{ analiz.risk }}</h2>
+        <p style="text-align: center; opacity: 0.9;">{{ analiz.url }}</p>
+
+        <hr style="border-color: rgba(255,255,255,0.3);">
+
+        <h3>⚠️ Tespit Edilen Risk Faktörleri:</h3>
+        {% if analiz.sebepler %}
+            <ul>
+                {% for sebep in analiz.sebepler %}
+                    <li>🔴 {{ sebep }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="text-align: center; font-size: 18px;">✅ Temiz! Herhangi bir şüpheli örüntü bulunamadı.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <a href="/" style="display:block; margin-top:30px; color:#999; text-decoration:none;">← Ana Menüye Dön</a>
+</div>
+
+</body>
+</html>

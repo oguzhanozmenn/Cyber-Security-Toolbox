@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siber Güvenlik Ultimate v3.0</title>
+    <style>
+        :root { --primary: #2c3e50; --bg: #ecf0f1; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); text-align: center; padding: 40px 0; }
+        h1 { color: var(--primary); margin: 0; font-size: 2.5rem; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; border-left: 6px solid #ccc; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { margin: 0 0 10px 0; color: var(--primary); font-size: 1.2rem; }
+        .btn { display: block; padding: 10px; text-decoration: none; border-radius: 6px; color: white; text-align: center; font-weight: bold; margin-top: auto; }
+        .section-title { grid-column: 1 / -1; text-align: left; font-weight: bold; color: #7f8c8d; border-bottom: 2px solid #ddd; margin-top: 20px; padding-bottom: 5px; text-transform: uppercase; }
+
+        /* Renkler */
+        .c-blue { border-color: #3498db; } .c-blue .btn { background: #3498db; }
+        .c-orange { border-color: #e67e22; } .c-orange .btn { background: #e67e22; }
+        .c-green { border-color: #27ae60; } .c-green .btn { background: #27ae60; }
+        .c-darkgreen { border-color: #16a085; } .c-darkgreen .btn { background: #16a085; }
+        .c-gold { border-color: #f1c40f; } .c-gold .btn { background: #f39c12; }
+        .c-purple { border-color: #8e44ad; } .c-purple .btn { background: #8e44ad; }
+        .c-teal { border-color: #1abc9c; } .c-teal .btn { background: #1abc9c; }
+        .c-red { border-color: #c0392b; } .c-red .btn { background: #c0392b; }
+        .c-black { border-color: #2c3e50; } .c-black .btn { background: #2c3e50; }
+        .c-ai { border-color: #2980b9; background: #eaf2f8; } .c-ai .btn { background: linear-gradient(90deg, #2980b9, #6dd5fa); }
+        .c-malware { border-color: #800000; background: #fadbd8; } .c-malware .btn { background: #800000; }
+    </style>
+</head>
+<body>
+
+    <div style="font-size: 50px;">🛡️</div>
+    <h1>Siber Güvenlik Laboratuvarı</h1>
+    <p>12 Gelişmiş Modül | AI & Malware Analizi</p>
+
+    <div class="grid-container">
+
+        <div class="section-title">🚀 İleri Seviye (Advanced)</div>
+        <div class="card c-malware">
+            <h3>💀 Ransomware (Fidye Yazılımı)</h3>
+            <p>Gerçek AES şifreleme ile dosyaları kilitleyen zararlı yazılım simülasyonu.</p>
+            <a href="/ransomware" class="btn">Sistemi Enfekte Et</a>
+        </div>
+        <div class="card c-ai">
+            <h3>🧠 AI Phishing Dedektörü</h3>
+            <p>Yapay zeka ile URL risk analizi.</p>
+            <a href="/phishing" class="btn">AI Analizi</a>
+        </div>
+
+        <div class="section-title">Temel & Ağ</div>
+        <div class="card c-blue"><h3>🔐 Parola Analizi</h3><p>Entropy ölçümü.</p><a href="/parola" class="btn">Git</a></div>
+        <div class="card c-orange"><h3>#️⃣ Hash</h3><p>SHA-256 doğrulama.</p><a href="/hash" class="btn">Git</a></div>
+        <div class="card c-green"><h3>📡 Port Tarama</h3><p>Servis keşfi.</p><a href="/port" class="btn">Git</a></div>
+        <div class="card c-darkgreen"><h3>👁️ IDS Trafik</h3><p>Saldırı tespiti.</p><a href="/ids" class="btn">Git</a></div>
+        <div class="card c-gold"><h3>🔗 Blockchain Log</h3><p>Değiştirilemez kayıt.</p><a href="/blockchain" class="btn">Git</a></div>
+
+        <div class="section-title">Kripto & Saldırı</div>
+        <div class="card c-purple"><h3>🗝️ Kripto</h3><p>Sezar Şifreleme.</p><a href="/sifreleme" class="btn">Git</a></div>
+        <div class="card c-teal"><h3>🕵️‍♂️ Steganografi</h3><p>Resim gizleme.</p><a href="/steganografi" class="btn">Git</a></div>
+        <div class="card c-red"><h3>💉 SQL Injection</h3><p>DB Sızma testi.</p><a href="/sqli" class="btn">Git</a></div>
+        <div class="card c-red"><h3>☠️ XSS</h3><p>Script enjeksiyonu.</p><a href="/xss" class="btn">Git</a></div>
+        <div class="card c-black"><h3>🔨 Brute Force</h3><p>Kaba kuvvet.</p><a href="/bruteforce" class="btn">Git</a></div>
+
+    </div>
+</body>
+</html>

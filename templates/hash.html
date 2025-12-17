@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modül 2: Hash Hesaplama</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background-color: #050505; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { width: 80%; max-width: 800px; margin-top: 50px; }
+        h2 { text-align: center; color: #00f3ff; border-bottom: 2px solid #00f3ff; padding-bottom: 10px; text-transform: uppercase; }
+
+        .compare-box { background: #111; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #333; }
+
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #00f3ff; }
+        input[type="text"] { width: 97%; padding: 12px; background: #000; border: 1px solid #555; color: #0f0; font-family: 'Courier New', monospace; font-size: 14px; }
+
+        .hash-output { background: #000; color: #ff0055; padding: 10px; margin-top: 5px; font-size: 12px; word-break: break-all; border-left: 3px solid #ff0055; }
+
+        button { width: 100%; padding: 15px; background-color: #00f3ff; color: #000; border: none; font-size: 18px; cursor: pointer; font-weight: bold; margin-top: 10px; border-radius: 5px; }
+        button:hover { background-color: white; }
+
+        .stats { text-align: center; margin-top: 20px; padding: 15px; background-color: #333; border: 1px solid #00f3ff; border-radius: 5px; font-weight: bold; color: #00f3ff; }
+
+        .back-link { display: block; margin-top: 30px; color: #666; text-align: center; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>#️⃣ Hash Hesaplama & Çığ Etkisi</h2>
+    <p style="text-align: center; color: #888;">SHA-256 Algoritması ile Veri Bütünlüğü Doğrulama</p>
+
+    <form method="POST">
+        <div class="compare-box">
+            <label>1. Metin (Orijinal Veri):</label>
+            <input type="text" name="metin1" value="{{ sonuc.metin1 if sonuc else '' }}" placeholder="İlk metni buraya yazın..." required>
+            {% if sonuc and sonuc.hash1 %}
+                <div class="hash-output">{{ sonuc.hash1 }}</div>
+            {% endif %}
+        </div>
+
+        <div class="compare-box">
+            <label>2. Metin (Değiştirilmiş Veri):</label>
+            <input type="text" name="metin2" value="{{ sonuc.metin2 if sonuc else '' }}" placeholder="İkinci metni buraya yazın..." required>
+            {% if sonuc and sonuc.hash2 %}
+                <div class="hash-output">{{ sonuc.hash2 }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit">ANALİZ ET</button>
+    </form>
+
+    {% if sonuc and sonuc.hash1 and sonuc.hash2 %}
+    <div class="stats">
+        ÇIĞ ETKİSİ: %{{ sonuc.degisim }} Farklılık Tespit Edildi!
+    </div>
+    {% endif %}
+
+    <a href="/" class="back-link">← Operasyon Merkezine Dön</a>
+</div>
+
+</body>
+</html>

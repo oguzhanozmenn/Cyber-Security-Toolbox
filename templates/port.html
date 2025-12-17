@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modül 3: Port Simülatörü</title>
+    <style>
+        body {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: #1e1e1e;
+            color: #00ff00;
+            padding: 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 90%;
+            margin-top: 30px;
+            border: 2px solid #00ff00;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            background-color: #000;
+        }
+
+        h2 {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        input[type="text"] {
+            background: #333;
+            border: 1px solid #00ff00;
+            color: white;
+            padding: 12px;
+            width: 60%;
+            font-family: 'Consolas', monospace;
+            font-size: 16px;
+        }
+
+        button {
+            background: #00ff00;
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Consolas', monospace;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00cc00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            color: #00ff00;
+            background-color: #111;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .open { background-color: #27ae60; } /* Yeşil */
+        .closed { background-color: #c0392b; } /* Kırmızı */
+        .error { background-color: #7f8c8d; } /* Gri */
+
+        .download-btn {
+            display: inline-block;
+            background-color: #e67e22;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-family: 'Consolas', monospace;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            background-color: #d35400;
+            box-shadow: 0 0 10px #e67e22;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 40px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover { color: #aaa; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📡 Ağ & Port Simülatörü</h2>
+    <p style="color: #aaa; margin-bottom: 20px;">Hedef sistem üzerindeki açık servisleri tespit edin.</p>
+
+    <form method="POST">
+        <div class="input-group">
+            <input type="text" name="hedef_ip" value="{{ ip if ip else '127.0.0.1' }}" placeholder="IP Adresi (Örn: 127.0.0.1)" required>
+            <button type="submit">TARAMAYI BAŞLAT</button>
+        </div>
+    </form>
+
+    {% if sonuclar %}
+    <h3 style="text-align: left; margin-top: 30px;">Sonuçlar: {{ ip }}</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>PORT</th>
+                <th>SERVİS</th>
+                <th>DURUM</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sonuc in sonuclar %}
+            <tr>
+                <td>{{ sonuc.port }}</td>
+                <td>{{ sonuc.servis }}</td>
+                <td>
+                    {% if sonuc.durum == 'AÇIK' %}
+                        <span class="badge open">AÇIK</span>
+                    {% elif sonuc.durum == 'KAPALI' %}
+                        <span class="badge closed">KAPALI</span>
+                    {% else %}
+                        <span class="badge error">HATA</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if rapor %}
+    <div style="margin-top: 25px;">
+        <a href="{{ rapor }}" download="Siber_Tarama_Raporu.txt" class="download-btn">
+            📄 RAPORU İNDİR (.TXT)
+        </a>
+    </div>
+    {% endif %}
+
+    {% endif %}
+
+    <a href="/" class="back-link">← Ana Menüye Dön</a>
+</div>
+
+</body>
+</html>

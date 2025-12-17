@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSec v5.0 - Ultimate Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-panel: #111;
+            --sidebar-width: 280px;
+            --neon-blue: #00f3ff;
+            --neon-green: #0aff00;
+            --neon-red: #ff0055;
+            --neon-gold: #ffd700;
+            --text-main: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- SOL MENÜ (SIDEBAR) --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: rgba(10, 10, 10, 0.95);
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 50px;
+            text-align: center;
+            text-shadow: 0 0 10px var(--neon-blue);
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 20px;
+        }
+
+        .menu-item {
+            color: #888;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-blue);
+            border-color: rgba(0, 243, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .menu-item.active {
+            background: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* --- ANA İÇERİK --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 40px 60px;
+        }
+
+        .header-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+
+        .system-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+
+        /* --- GRID VE KARTLAR --- */
+        .section-header {
+            grid-column: 1 / -1;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Başlıkların Rengi ve Parlaması */
+        .h-adv { color: var(--neon-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); border-color: var(--neon-gold); }
+        .h-def { color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); border-color: var(--neon-blue); }
+        .h-att { color: var(--neon-red); text-shadow: 0 0 10px rgba(255, 0, 85, 0.5); border-color: var(--neon-red); }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(30, 30, 30, 0.8);
+            border-color: white;
+        }
+
+        .card h3 {
+            margin: 0 0 15px 0;
+            font-size: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card p {
+            color: #999;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            transition: 0.3s;
+            background: transparent;
+            border: 1px solid;
+            font-size: 14px;
+        }
+
+        /* Kart Renkleri */
+        .c-red { border-top: 3px solid var(--neon-red); }
+        .c-red h3 { color: var(--neon-red); }
+        .c-red .btn { border-color: var(--neon-red); color: var(--neon-red); }
+        .c-red .btn:hover { background: var(--neon-red); color: white; box-shadow: 0 0 20px var(--neon-red); }
+
+        .c-blue { border-top: 3px solid var(--neon-blue); }
+        .c-blue h3 { color: var(--neon-blue); }
+        .c-blue .btn { border-color: var(--neon-blue); color: var(--neon-blue); }
+        .c-blue .btn:hover { background: var(--neon-blue); color: black; box-shadow: 0 0 20px var(--neon-blue); }
+
+        .c-green { border-top: 3px solid var(--neon-green); }
+        .c-green h3 { color: var(--neon-green); }
+        .c-green .btn { border-color: var(--neon-green); color: var(--neon-green); }
+        .c-green .btn:hover { background: var(--neon-green); color: black; box-shadow: 0 0 20px var(--neon-green); }
+
+        .c-gold { border-top: 3px solid var(--neon-gold); }
+        .c-gold h3 { color: var(--neon-gold); }
+        .c-gold .btn { border-color: var(--neon-gold); color: var(--neon-gold); }
+        .c-gold .btn:hover { background: var(--neon-gold); color: black; box-shadow: 0 0 20px var(--neon-gold); }
+
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo">🛡️ CYBERSEC</div>
+        <a href="#" class="menu-item active"><span>📊</span> Dashboard</a>
+        <a href="/ids" class="menu-item"><span>📡</span> Ağ Trafiği</a>
+        <a href="/blockchain" class="menu-item"><span>🔗</span> Log Kayıtları</a>
+        <a href="/ransomware" class="menu-item"><span>💀</span> Malware Lab</a>
+
+        <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid #333; color: #555; font-size: 12px; text-align: center;">
+            System Version 5.0<br>
+            Secure Connection<br>
+            Ankara/TR
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <div class="header-status">
+            <div>
+                <h1 style="margin:0; font-size: 28px; color: white;">Operasyon Kontrol Merkezi</h1>
+                <p style="margin:5px 0 0 0; color:#666;">Aktif Siber Savunma ve Saldırı Simülasyonu</p>
+            </div>
+            <div class="system-status">
+                ● SYSTEM: ONLINE<br>
+                ● MODULES: 12 ACTIVE<br>
+                ● SECURITY: HIGH
+            </div>
+        </div>
+
+        <div class="grid-container">
+
+            <div class="section-header h-adv">🚀 İleri Seviye Tehditler</div>
+
+            <div class="card c-red">
+                <h3>Ransomware <span>💀</span></h3>
+                <p>Gerçek AES-128 şifreleme algoritması kullanan fidye yazılımı simülasyonu.</p>
+                <a href="/ransomware" class="btn">Enfekte Et</a>
+            </div>
+
+            <div class="card c-gold">
+                <h3>AI Phishing <span>🧠</span></h3>
+                <p>Yapay zeka ile zararlı URL ve oltalama saldırılarını analiz edin.</p>
+                <a href="/phishing" class="btn">Analiz Yap</a>
+            </div>
+
+            <div class="card c-gold">
+                <h3>Blockchain Log <span>⛓️</span></h3>
+                <p>Değiştirilemez, kriptografik olarak güvenli log kayıt zinciri.</p>
+                <a href="/blockchain" class="btn">Zinciri İncele</a>
+            </div>
+
+            <div class="section-header h-def">🛡️ Ağ & Sistem Savunması</div>
+
+            <div class="card c-green">
+                <h3>IDS Trafik <span>👁️</span></h3>
+                <p>Ağ trafiğini canlı izleyin ve SQLi/DDoS saldırılarını tespit edin.</p>
+                <a href="/ids" class="btn">Monitörü Aç</a>
+            </div>
+
+            <div class="card c-green">
+                <h3>Port Tarama <span>📡</span></h3>
+                <p>Hedef sistemdeki açık portları ve zafiyetleri tarayın.</p>
+                <a href="/port" class="btn">Taramayı Başlat</a>
+            </div>
+
+            <div class="card c-blue">
+                <h3>Hash Check <span>#️⃣</span></h3>
+                <p>Dosya ve veri bütünlüğünü SHA-256 ile doğrulayın.</p>
+                <a href="/hash" class="btn">Hesapla</a>
+            </div>
+
+            <div class="card c-blue">
+                <h3>Parola Analiz <span>🔐</span></h3>
+                <p>Şifrelerin kırılma süresini ve entropisini ölçün.</p>
+                <a href="/parola" class="btn">Test Et</a>
+            </div>
+
+            <div class="section-header h-att">⚠️ Saldırı Simülasyonları</div>
+
+            <div class="card c-red">
+                <h3>SQL Injection <span>💉</span></h3>
+                <p>Veritabanı manipülasyonu ile yetkisiz giriş denemesi.</p>
+                <a href="/sqli" class="btn">Hacklemeyi Dene</a>
+            </div>
+
+            <div class="card c-red">
+                <h3>XSS Attack <span>☠️</span></h3>
+                <p>Cross-Site Scripting ile tarayıcı tabanlı saldırı testi.</p>
+                <a href="/xss" class="btn">Script Enjekte Et</a>
+            </div>
+
+            <div class="card c-red">
+                <h3>Brute Force <span>🔨</span></h3>
+                <p>Kaba kuvvet saldırısı ile şifre kırma hız testi.</p>
+                <a href="/bruteforce" class="btn">Saldır</a>
+            </div>
+
+            <div class="section-header h-def">🔒 Gizlilik Araçları</div>
+
+            <div class="card c-blue">
+                <h3>Steganografi <span>🖼️</span></h3>
+                <p>Resimlerin piksel kodlarına gizli mesajlar saklayın.</p>
+                <a href="/steganografi" class="btn">Gizle / Oku</a>
+            </div>
+
+            <div class="card c-blue">
+                <h3>Kripto Lab <span>🗝️</span></h3>
+                <p>Sezar şifreleme algoritması laboratuvarı.</p>
+                <a href="/sifreleme" class="btn">Şifrele</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modül 9: Ağ Trafiği & IDS</title>
+    <style>
+        body { font-family: 'Consolas', 'Courier New', monospace; background-color: #0d0d0d; color: #00ff00; padding: 20px; text-align: center; }
+
+        .monitor { width: 90%; margin: 0 auto; border: 2px solid #333; background: #000; padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 0, 0.2); }
+
+        h1 { color: #fff; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
+
+        .controls { margin-bottom: 20px; }
+        .btn-refresh { background-color: #00ff00; color: #000; border: none; padding: 10px 25px; font-weight: bold; cursor: pointer; font-size: 16px; font-family: inherit; }
+        .btn-refresh:hover { background-color: #fff; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+        th { text-align: left; border-bottom: 1px solid #555; padding: 10px; color: #888; }
+        td { padding: 8px; border-bottom: 1px solid #222; }
+
+        /* Satır Renkleri */
+        .row-normal { color: #00ff00; }
+        .row-tehlike { color: #e74c3c; font-weight: bold; animation: blink 1s infinite; background: rgba(231, 76, 60, 0.1); }
+
+        .alert-box { background-color: #c0392b; color: white; padding: 15px; margin-bottom: 20px; font-weight: bold; display: none; }
+
+        @keyframes blink { 50% { opacity: 0.5; } }
+    </style>
+</head>
+<body>
+
+    <div class="monitor">
+        <h1>📡 Canlı Ağ Trafiği İzleme (IDS)</h1>
+
+        {% if tehdit_sayisi > 0 %}
+        <div class="alert-box" style="display: block;">
+            ⚠️ UYARI: AĞDA {{ tehdit_sayisi }} ADET ŞÜPHELİ PAKET TESPİT EDİLDİ!
+        </div>
+        {% endif %}
+
+        <div class="controls">
+            <p>Durum: <span style="color: #00ff00;">İzleniyor...</span> | Protokol: Tümü</p>
+            <a href="/ids"><button class="btn-refresh">🔄 Trafiği Yenile / Tara</button></a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>ZAMAN</th>
+                    <th>KAYNAK IP</th>
+                    <th>HEDEF IP</th>
+                    <th>PROTOKOL</th>
+                    <th>VERİ İÇERİĞİ (PAYLOAD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in paketler %}
+                <tr class="row-{{ p.durum }}">
+                    <td>{{ p.no }}</td>
+                    <td>{{ p.zaman }}</td>
+                    <td>{{ p.kaynak }}</td>
+                    <td>{{ p.hedef }}</td>
+                    <td>{{ p.protokol }}</td>
+                    <td>
+                        {% if p.durum == 'tehlike' %}
+                            [TEHDİT] {{ p.bilgi }}
+                        {% else %}
+                            {{ p.bilgi }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/" style="display:block; margin-top:30px; color:#555; text-decoration:none;">← Ana Menüye Dön</a>
+
+</body>
+</html>

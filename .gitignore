@@ -1,0 +1,9 @@
+venv/
+.idea/
+__pycache__/
+*.pyc
+static/safe_zone/*
+!static/safe_zone/.gitkeep
+static/ransom.key
+instance/
+.DS_Store

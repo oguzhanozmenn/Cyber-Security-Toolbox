@@ -1,0 +1,16 @@
+SİBER GÜVENLİK RAPORU
+Hedef: 127.0.0.1
+Tarih: 12-12-2025 20:56:34
+------------------------------
+[-] Port 21 (FTP): KAPALI
+[-] Port 22 (SSH): KAPALI
+[-] Port 23 (Telnet): KAPALI
+[-] Port 25 (SMTP): KAPALI
+[+] Port 53 (DNS): AÇIK
+[-] Port 80 (HTTP): KAPALI
+[-] Port 110 (POP3): KAPALI
+[-] Port 443 (HTTPS): KAPALI
+[-] Port 3306 (MySQL): KAPALI
+[-] Port 8080 (HTTP Proxy): KAPALI
+------------------------------
+ÖZET: 1 açık port bulundu.
